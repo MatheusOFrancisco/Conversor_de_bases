@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="pt_br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversor de Numeros</title>
+</head>
+
+<body>
+    <h1>Conversor de Numeros</h1>
+    <br>
+    <h3>Escolha qual tipo de sistema de numeração do numero que deseja inserir:</h3>
+    <br>
+    <button onclick="decimal()">Decimal</button>
+    <button onclick="binario()">Binario</button>
+    <button onclick="octal()">Octal</button>
+    <button onclick="hexadecimal()">Hexadecimal</button>
+    <div id="div_exibir"></div>
+    <br>
+    <div id="div_exibir_2"></div>
+    <div id="div_exibir_3"></div>
+    <div id="div_exibir_4"></div>
+    <div id="div_exibir_5"></div>
+</body>
+
+<script>
+    let potencia_2 = [1]
+
+    function decimal() {
+        div_exibir.innerHTML = 'Digite o numero na base Decimal: <input type="text" id="ipt_numero"><br><button onclick="converter_decimal_tudo()">Converter</button>'
+    }
+
+    function binario() {
+        div_exibir.innerHTML = 'Digite o numero na base Binario: <input type="text" id="ipt_numero"><br><button onclick="converter_binario_tudo()">Converter</button>'
+    }
+
+    function octal() {
+        div_exibir.innerHTML = 'Digite o numero na base Octal: <input type="text" id="ipt_numero"><br><button onclick="converter_octal_tudo()">Converter</button>'
+    }
+
+    function hexadecimal() {
+        div_exibir.innerHTML = 'Digite o numero na base Hexadecimal: <input type="text" id="ipt_numero"><br><button onclick="converter_hexadecimal_tudo()">Converter</button>'
+    }
+
+    function converter_decimal_tudo() {
+        let numero = Number(ipt_numero.value)
+        div_exibir_2.innerHTML = `Decimal: ${numero}`
+        // converter_decimal_binario()
+        // converter_decimal_binario_octal()
+        converter_decimal_binario_octal_hexadecimal()
+    }
+
+    // Parte do codigo que transforma o decimal em binario, octal e então em hexadecimal
+
+    function converter_decimal_binario_octal_hexadecimal() {
+
+        // Parte binaria
+        potencia_2 = [1]
+        let numero = ipt_numero.value
+        let resultado_binario = ""
+        while (numero >= potencia_2[potencia_2.length - 1]) {
+            potencia_2.push(2 ** potencia_2.length)
+        }
+
+        let contador = potencia_2.length - 2
+
+        while (contador >= 0) {
+
+            if (numero >= potencia_2[contador]) {
+                numero = numero - potencia_2[contador]
+                resultado_binario = resultado_binario + "1"
+            } else {
+                resultado_binario = resultado_binario + "0"
+            }
+
+            contador = contador - 1
+        }
+        div_exibir_3.innerHTML = `Binario: ${resultado_binario}`
+
+        // Parte Octal
+
+        let tabela_octal = { '000': '0', '001': '1', '010': '2', '011': '3', '100': '4', '101': '5', '110': '6', '111': '7' }
+        let binario_octal = resultado_binario
+
+        while ((binario_octal.length % 3) != 0) {
+            binario_octal = '0' + binario_octal
+        }
+
+        let resultado_binario_pedacos_3 = binario_octal.match(/.{1,3}/g)
+        let resultado_octal = ''
+
+        for (let trio of resultado_binario_pedacos_3) {
+            if (trio in tabela_octal) {
+                resultado_octal = resultado_octal + tabela_octal[trio]
+            }
+        }
+
+        div_exibir_4.innerHTML = `Octal: ${resultado_octal}`
+
+        // Parte Hexadecimal
+
+        let tabela_hexadecimal = { '0000': '0', '0001': '1', '0010': '2', '0011': '3', '0100': '4', '0101': '5', '0110': '6', '0111': '7', '1000': '8', '1001': '9', '1010': 'A', '1011': 'B', '1100': 'C', '1101': 'D', '1110': 'E', '1111': 'F' }
+        let binario_hexadecimal = resultado_binario
+
+        while ((binario_hexadecimal.length % 4) != 0) {
+            binario_hexadecimal = '0' + binario_hexadecimal
+        }
+
+        let resultado_binario_pedacos_4 = binario_hexadecimal.match(/.{1,4}/g)
+        let resultado_hexadecimal = ''
+
+        for (let quarteto of resultado_binario_pedacos_4) {
+            if (quarteto in tabela_hexadecimal) {
+                resultado_hexadecimal = resultado_hexadecimal + tabela_hexadecimal[quarteto]
+            }
+        }
+
+        div_exibir_5.innerHTML = `Hexadecimal: ${resultado_hexadecimal}`
+    }
+
+    function converter_binario_tudo(){
+        let numero = Number(ipt_numero.value)
+        div_exibir_2.innerHTML = `Binario: ${numero}`
+        // converter_decimal_binario()
+        // converter_decimal_binario_octal()
+        converter_binario_decimal_octal_hexadecimal()
+    }
+
+    function converter_binario_decimal_octal_hexadecimal(){
+
+        // Parte decimal
+        potencia_2 = [1]
+        let numero = ipt_numero.value
+        let resultado_decimal = 0
+
+        let numero_lista = numero.split('')
+
+        while (numero_lista[0] == '0'){
+            numero_lista.shift()
+        }
+
+        numero = numero_lista.join('')
+
+        while (numero_lista.length > potencia_2.length) {
+            potencia_2.push(2 ** potencia_2.length)
+        }
+
+        let contador = numero_lista.length - 1
+        let contador_potencia = 0
+
+        while (contador >= 0) {
+            if (numero_lista[contador] == '1') {
+                resultado_decimal += potencia_2[contador_potencia]
+            }
+
+            contador -= 1
+            contador_potencia += 1
+        }
+        div_exibir_3.innerHTML = `Decimal: ${resultado_decimal}`
+
+        // Parte Octal
+
+        let tabela_octal = { '000': '0', '001': '1', '010': '2', '011': '3', '100': '4', '101': '5', '110': '6', '111': '7' }
+        let binario_octal = numero
+
+        while ((binario_octal.length % 3) != 0) {
+            binario_octal = '0' + binario_octal
+        }
+
+        let resultado_binario_pedacos_3 = binario_octal.match(/.{1,3}/g)
+        let resultado_octal = ''
+
+        for (let trio of resultado_binario_pedacos_3) {
+            if (trio in tabela_octal) {
+                resultado_octal = resultado_octal + tabela_octal[trio]
+            }
+        }
+
+        div_exibir_4.innerHTML = `Octal: ${resultado_octal}`
+
+        // Parte Hexadecimal
+
+        let tabela_hexadecimal = { '0000': '0', '0001': '1', '0010': '2', '0011': '3', '0100': '4', '0101': '5', '0110': '6', '0111': '7', '1000': '8', '1001': '9', '1010': 'A', '1011': 'B', '1100': 'C', '1101': 'D', '1110': 'E', '1111': 'F' }
+        let binario_hexadecimal = numero
+
+        while ((binario_hexadecimal.length % 4) != 0) {
+            binario_hexadecimal = '0' + binario_hexadecimal
+        }
+
+        let resultado_binario_pedacos_4 = binario_hexadecimal.match(/.{1,4}/g)
+        let resultado_hexadecimal = ''
+
+        for (let quarteto of resultado_binario_pedacos_4) {
+            if (quarteto in tabela_hexadecimal) {
+                resultado_hexadecimal = resultado_hexadecimal + tabela_hexadecimal[quarteto]
+            }
+        }
+
+        div_exibir_5.innerHTML = `Hexadecimal: ${resultado_hexadecimal}`
+    }
+</script>
+
+</html>
