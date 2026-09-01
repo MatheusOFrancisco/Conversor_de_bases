@@ -275,6 +275,90 @@
 
         div_exibir_5.innerHTML = `Hexadecimal: ${resultado_hexadecimal}`
     }
+
+    // QUARTA PARTE CONVERSOR
+
+    function converter_hexadecimal_tudo() {
+        let numero = ipt_numero.value
+        let numero_lista = numero.split('')
+
+        while (numero_lista[0] == '0'){
+            numero_lista.shift()
+        }
+        numero = numero_lista.join('')
+
+        div_exibir_5.innerHTML = `Hexadecimal: ${numero}`
+        converter_hexadecimal_binario_decimal_octal()
+    }
+
+    function converter_hexadecimal_binario_decimal_octal(){
+
+        // PARTE BINARIA
+
+        let numero = ipt_numero.value
+        let numero_lista = numero.split('')
+        let resultado_binario = ''
+
+        let tabela_hexadecimal = { '0': '0000', '1': '0001', '2': '0010', '3': '0011', '4': '0100', '5': '0101', '6': '0110', '7': '0111', '8': '1000', '9': '1001', 'A': '1010', 'B': '1011', 'C': '1100', 'D': '1101', 'E': '1110', 'F': '1111'}
+
+        for (let quarteto of numero_lista) {
+            if (quarteto in tabela_hexadecimal) {
+                resultado_binario = resultado_binario + tabela_hexadecimal[quarteto]
+            }
+        }
+
+        let resultado_binario_lista = resultado_binario.split('')
+        while (resultado_binario_lista[0] == 0){
+            resultado_binario_lista.shift()
+        }
+        resultado_binario = resultado_binario_lista.join('')
+
+        div_exibir_3.innerHTML = `Binario: ${resultado_binario}`
+
+        // PARTE DECIMAL
+
+        potencia_2 = [1]
+        let resultado_decimal = 0
+
+        let binario_lista = resultado_binario.split('')
+
+        while (binario_lista.length > potencia_2.length) {
+            potencia_2.push(2 ** potencia_2.length)
+        }
+
+        let contador = binario_lista.length - 1
+        let contador_potencia = 0
+
+        while (contador >= 0) {
+            if (binario_lista[contador] == '1') {
+                resultado_decimal += potencia_2[contador_potencia]
+            }
+
+            contador -= 1
+            contador_potencia += 1
+        }
+        div_exibir_2.innerHTML = `Decimal: ${resultado_decimal}`
+
+        // Parte Octal
+
+        let tabela_octal = { '000': '0', '001': '1', '010': '2', '011': '3', '100': '4', '101': '5', '110': '6', '111': '7' }
+        let binario_octal = resultado_binario
+
+        while ((binario_octal.length % 3) != 0) {
+            binario_octal = '0' + binario_octal
+        }
+
+        let resultado_binario_pedacos_3 = binario_octal.match(/.{1,3}/g)
+        let resultado_octal = ''
+
+        for (let trio of resultado_binario_pedacos_3) {
+            if (trio in tabela_octal) {
+                resultado_octal = resultado_octal + tabela_octal[trio]
+            }
+        }
+
+        div_exibir_4.innerHTML = `Octal: ${resultado_octal}`
+    }
 </script>
 
 </html>
