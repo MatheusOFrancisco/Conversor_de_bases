@@ -46,8 +46,6 @@
     function converter_decimal_tudo() {
         let numero = Number(ipt_numero.value)
         div_exibir_2.innerHTML = `Decimal: ${numero}`
-        // converter_decimal_binario()
-        // converter_decimal_binario_octal()
         converter_decimal_binario_octal_hexadecimal()
     }
 
@@ -121,15 +119,16 @@
 
     function converter_binario_tudo(){
         let numero = Number(ipt_numero.value)
-        div_exibir_2.innerHTML = `Binario: ${numero}`
-        // converter_decimal_binario()
-        // converter_decimal_binario_octal()
+        div_exibir_3.innerHTML = `Binario: ${numero}`
         converter_binario_decimal_octal_hexadecimal()
     }
+
+    // 2 PARTE CONVERSOR
 
     function converter_binario_decimal_octal_hexadecimal(){
 
         // Parte decimal
+
         potencia_2 = [1]
         let numero = ipt_numero.value
         let resultado_decimal = 0
@@ -157,7 +156,7 @@
             contador -= 1
             contador_potencia += 1
         }
-        div_exibir_3.innerHTML = `Decimal: ${resultado_decimal}`
+        div_exibir_2.innerHTML = `Decimal: ${resultado_decimal}`
 
         // Parte Octal
 
@@ -183,6 +182,83 @@
 
         let tabela_hexadecimal = { '0000': '0', '0001': '1', '0010': '2', '0011': '3', '0100': '4', '0101': '5', '0110': '6', '0111': '7', '1000': '8', '1001': '9', '1010': 'A', '1011': 'B', '1100': 'C', '1101': 'D', '1110': 'E', '1111': 'F' }
         let binario_hexadecimal = numero
+
+        while ((binario_hexadecimal.length % 4) != 0) {
+            binario_hexadecimal = '0' + binario_hexadecimal
+        }
+
+        let resultado_binario_pedacos_4 = binario_hexadecimal.match(/.{1,4}/g)
+        let resultado_hexadecimal = ''
+
+        for (let quarteto of resultado_binario_pedacos_4) {
+            if (quarteto in tabela_hexadecimal) {
+                resultado_hexadecimal = resultado_hexadecimal + tabela_hexadecimal[quarteto]
+            }
+        }
+
+        div_exibir_5.innerHTML = `Hexadecimal: ${resultado_hexadecimal}`
+    }
+
+    // TERCEIRA PARTE CONVERSOR
+
+    function converter_octal_tudo() {
+        let numero = Number(ipt_numero.value)
+        div_exibir_4.innerHTML = `Octal: ${numero}`
+        converter_octal_binario_decimal_hexadecimal()
+    }
+
+    function converter_octal_binario_decimal_hexadecimal(){
+
+        // PARTE BINARIA
+
+        let numero = ipt_numero.value
+        let numero_lista = numero.split('')
+        let resultado_binario = ''
+
+        let tabela_octal = { '0': '000', '1': '001', '2': '010', '3': '011', '4': '100', '5': '101', '6': '110', '7': '111' }
+
+        for (let trio of numero_lista) {
+            if (trio in tabela_octal) {
+                resultado_binario = resultado_binario + tabela_octal[trio]
+            }
+        }
+
+        let resultado_binario_lista = resultado_binario.split('')
+        while (resultado_binario_lista[0] == 0){
+            resultado_binario_lista.shift()
+        }
+        resultado_binario = resultado_binario_lista.join('')
+
+        div_exibir_3.innerHTML = `Binario: ${resultado_binario}`
+
+        // PARTE DECIMAL
+
+        potencia_2 = [1]
+        let resultado_decimal = 0
+
+        let binario_lista = resultado_binario.split('')
+
+        while (binario_lista.length > potencia_2.length) {
+            potencia_2.push(2 ** potencia_2.length)
+        }
+
+        let contador = binario_lista.length - 1
+        let contador_potencia = 0
+
+        while (contador >= 0) {
+            if (binario_lista[contador] == '1') {
+                resultado_decimal += potencia_2[contador_potencia]
+            }
+
+            contador -= 1
+            contador_potencia += 1
+        }
+        div_exibir_2.innerHTML = `Decimal: ${resultado_decimal}`
+
+        // Parte Hexadecimal
+
+        let tabela_hexadecimal = { '0000': '0', '0001': '1', '0010': '2', '0011': '3', '0100': '4', '0101': '5', '0110': '6', '0111': '7', '1000': '8', '1001': '9', '1010': 'A', '1011': 'B', '1100': 'C', '1101': 'D', '1110': 'E', '1111': 'F' }
+        let binario_hexadecimal = resultado_binario
 
         while ((binario_hexadecimal.length % 4) != 0) {
             binario_hexadecimal = '0' + binario_hexadecimal
