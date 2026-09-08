@@ -4,47 +4,421 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Conversor de Numeros</title>
+    <title>Conversor de Bases</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <h1>Conversor de Numeros</h1>
-    <br>
-    <h3>Escolha qual tipo de sistema de numeração do numero que deseja inserir:</h3>
-    <br>
-    <button onclick="decimal()">Decimal</button>
-    <button onclick="binario()">Binario</button>
-    <button onclick="octal()">Octal</button>
-    <button onclick="hexadecimal()">Hexadecimal</button>
-    <div id="div_exibir"></div>
-    <br>
-    <div id="div_exibir_2"></div>
-    <div id="div_exibir_3"></div>
-    <div id="div_exibir_4"></div>
-    <div id="div_exibir_5"></div>
+    <div id="caixapai" class="caixapai">
+        <div class="title">Conversor de Bases</div>
+        <div id="tela" class="tela">
+            <div class="text_tela" id="div_exibir_2"></div>
+            <div class="text_tela" id="div_exibir_3"></div>
+            <div class="text_tela" id="div_exibir_4"></div>
+            <div class="text_tela" id="div_exibir_5"></div>
+        </div>
+        <div id="button" class="caixafilho">
+            <button class="button" onclick="decimal()">Decimal</button>
+            <button class="button" onclick="binario()">Binario</button>
+            <button class="button" onclick="octal()">Octal</button>
+            <button class="button" onclick="hexadecimal()">Hexadecimal</button>
+        </div>
+        <div id="tela2" class="tela2">
+            <div id="div_exibir"></div>
+        </div>
+        <div class="caixafilho2">
+            <div id="todosbotoes">
+                <button id="button7" class="button_desativo" onclick="">7</button>
+                <button id="button4" class="button_desativo" onclick="">4</button>
+                <button id="button1" class="button_desativo" onclick="">1</button>
+                <button id="buttonsubtracao" class="button_desativo" onclick="">-</button>
+            </div>
+            <div>
+                <button id="button8" class="button_desativo" onclick="">8</button>
+                <button id="button5" class="button_desativo" onclick="">5</button>
+                <button id="button2" class="button_desativo" onclick="">2</button>
+                <button id="button0" class="button_desativo" onclick="">0</button>
+            </div>
+            <div>
+                <button id="button9" class="button_desativo" onclick="">9</button>
+                <button id="button6" class="button_desativo" onclick="">6</button>
+                <button id="button3" class="button_desativo" onclick="">3</button>
+                <button id="buttonponto" class="button_desativo" onclick="">.</button>
+            </div>
+            <div>
+                <button id="buttona" class="button_desativo" onclick="">A</button>
+                <button id="buttonb" class="button_desativo" onclick="">B</button>
+                <button id="buttonc" class="button_desativo" onclick="">C</button>
+                <button id="buttond" class="button_desativo" onclick="">D</button>
+            </div>
+            <div>
+                <button id="buttone" class="button_desativo" onclick="">E</button>
+                <button id="buttonf" class="button_desativo" onclick="">F</button>
+                <button id="buttoncc" class="button_desativo" onclick="">CC</button>
+                <button id="buttonigual" class="button_desativo" onclick="">=</button>
+            </div>
+        </div>
+    </div>
 </body>
 
 <script>
     let potencia_2 = [1]
+    let numero_resultado = []
+    let decimal_escolhido = false
+    let binario_escolhido = false
+    let octal_escolhido = false
+    let hexadecimal_escolhido = false
 
     function decimal() {
-        div_exibir.innerHTML = 'Digite o numero na base Decimal: <input type="text" id="ipt_numero"><br><button onclick="converter_decimal_tudo()">Converter</button>'
+        button0.className = 'button_ativo'
+        button0.onclick = adicionar0
+
+        button1.className = 'button_ativo'
+        button1.onclick = adicionar1
+
+        button2.className = 'button_ativo'
+        button2.onclick = adicionar2
+
+        button3.className = 'button_ativo'
+        button3.onclick = adicionar3
+
+        button4.className = 'button_ativo'
+        button4.onclick = adicionar4
+
+        button5.className = 'button_ativo'
+        button5.onclick = adicionar5
+
+        button6.className = 'button_ativo'
+        button6.onclick = adicionar6
+
+        button7.className = 'button_ativo'
+        button7.onclick = adicionar7
+
+        button8.className = 'button_ativo'
+        button8.onclick = adicionar8
+
+        button9.className = 'button_ativo'
+        button9.onclick = adicionar9
+
+        buttona.className = 'button_desativo'
+        buttona.onclick = ''
+
+        buttonb.className = 'button_desativo'
+        buttonb.onclick = ''
+
+        buttonc.className = 'button_desativo'
+        buttonc.onclick = ''
+
+        buttond.className = 'button_desativo'
+        buttond.onclick = ''
+
+        buttone.className = 'button_desativo'
+        buttone.onclick = ''
+
+        buttonf.className = 'button_desativo'
+        buttonf.onclick = ''
+
+        buttoncc.className = 'button_ativo'
+        buttoncc.onclick = apagar_numero
+
+        buttonigual.className = 'button_ativo'
+        buttonigual.onclick = converter
+
+        decimal_escolhido = true
+        binario_escolhido = false
+        octal_escolhido = false
+        hexadecimal_escolhido = false
     }
 
     function binario() {
-        div_exibir.innerHTML = 'Digite o numero na base Binario: <input type="text" id="ipt_numero"><br><button onclick="converter_binario_tudo()">Converter</button>'
+        button0.className = 'button_ativo'
+        button0.onclick = adicionar0
+
+        button1.className = 'button_ativo'
+        button1.onclick = adicionar1
+
+        button2.className = 'button_desativo'
+        button2.onclick = ''
+
+        button3.className = 'button_desativo'
+        button3.onclick = ''
+
+        button4.className = 'button_desativo'
+        button4.onclick = ''
+
+        button5.className = 'button_desativo'
+        button5.onclick = ''
+
+        button6.className = 'button_desativo'
+        button6.onclick = ''
+
+        button7.className = 'button_desativo'
+        button7.onclick = ''
+
+        button8.className = 'button_desativo'
+        button8.onclick = ''
+
+        button9.className = 'button_desativo'
+        button9.onclick = ''
+
+        buttona.className = 'button_desativo'
+        buttona.onclick = ''
+
+        buttonb.className = 'button_desativo'
+        buttonb.onclick = ''
+
+        buttonc.className = 'button_desativo'
+        buttonc.onclick = ''
+
+        buttond.className = 'button_desativo'
+        buttond.onclick = ''
+
+        buttone.className = 'button_desativo'
+        buttone.onclick = ''
+
+        buttonf.className = 'button_desativo'
+        buttonf.onclick = ''
+
+        buttoncc.className = 'button_ativo'
+        buttoncc.onclick = apagar_numero
+
+        buttonigual.className = 'button_ativo'
+        buttonigual.onclick = converter
+
+        decimal_escolhido = false
+        binario_escolhido = true
+        octal_escolhido = false
+        hexadecimal_escolhido = false
     }
 
     function octal() {
-        div_exibir.innerHTML = 'Digite o numero na base Octal: <input type="text" id="ipt_numero"><br><button onclick="converter_octal_tudo()">Converter</button>'
+        button0.className = 'button_ativo'
+        button0.onclick = adicionar0
+
+        button1.className = 'button_ativo'
+        button1.onclick = adicionar1
+
+        button2.className = 'button_ativo'
+        button2.onclick = adicionar2
+
+        button3.className = 'button_ativo'
+        button3.onclick = adicionar3
+
+        button4.className = 'button_ativo'
+        button4.onclick = adicionar4
+
+        button5.className = 'button_ativo'
+        button5.onclick = adicionar5
+
+        button6.className = 'button_ativo'
+        button6.onclick = adicionar6
+
+        button7.className = 'button_ativo'
+        button7.onclick = adicionar7
+
+        button8.className = 'button_desativo'
+        button8.onclick = ''
+
+        button9.className = 'button_desativo'
+        button9.onclick = ''
+
+        buttona.className = 'button_desativo'
+        buttona.onclick = ''
+
+        buttonb.className = 'button_desativo'
+        buttonb.onclick = ''
+
+        buttonc.className = 'button_desativo'
+        buttonc.onclick = ''
+
+        buttond.className = 'button_desativo'
+        buttond.onclick = ''
+
+        buttone.className = 'button_desativo'
+        buttone.onclick = ''
+
+        buttonf.className = 'button_desativo'
+        buttonf.onclick = ''
+
+        buttoncc.className = 'button_ativo'
+        buttoncc.onclick = apagar_numero
+
+        buttonigual.className = 'button_ativo'
+        buttonigual.onclick = converter
+
+        decimal_escolhido = false
+        binario_escolhido = false
+        octal_escolhido = true
+        hexadecimal_escolhido = false
     }
 
     function hexadecimal() {
-        div_exibir.innerHTML = 'Digite o numero na base Hexadecimal: <input type="text" id="ipt_numero"><br><button onclick="converter_hexadecimal_tudo()">Converter</button>'
+        button0.className = 'button_ativo'
+        button0.onclick = adicionar0
+
+        button1.className = 'button_ativo'
+        button1.onclick = adicionar1
+
+        button2.className = 'button_ativo'
+        button2.onclick = adicionar2
+
+        button3.className = 'button_ativo'
+        button3.onclick = adicionar3
+
+        button4.className = 'button_ativo'
+        button4.onclick = adicionar4
+
+        button5.className = 'button_ativo'
+        button5.onclick = adicionar5
+
+        button6.className = 'button_ativo'
+        button6.onclick = adicionar6
+
+        button7.className = 'button_ativo'
+        button7.onclick = adicionar7
+
+        button8.className = 'button_ativo'
+        button8.onclick = adicionar8
+
+        button9.className = 'button_ativo'
+        button9.onclick = adicionar9
+
+        buttona.className = 'button_ativo'
+        buttona.onclick = adicionara
+
+        buttonb.className = 'button_ativo'
+        buttonb.onclick = adicionarb
+
+        buttonc.className = 'button_ativo'
+        buttonc.onclick = adicionarc
+
+        buttond.className = 'button_ativo'
+        buttond.onclick = adicionard
+
+        buttone.className = 'button_ativo'
+        buttone.onclick = adicionare
+
+        buttonf.className = 'button_ativo'
+        buttonf.onclick = adicionarf
+
+        buttoncc.className = 'button_ativo'
+        buttoncc.onclick = apagar_numero
+
+        buttonigual.className = 'button_ativo'
+        buttonigual.onclick = converter
+
+        decimal_escolhido = false
+        binario_escolhido = false
+        octal_escolhido = false
+        hexadecimal_escolhido = true
+    }
+
+    function converter(){
+        if (decimal_escolhido === true){
+            converter_decimal_tudo()
+        }
+        if (binario_escolhido === true){
+            converter_binario_tudo()
+        }
+        if (octal_escolhido === true){
+            converter_octal_tudo()
+        }
+        if (hexadecimal_escolhido === true){
+            converter_hexadecimal_tudo()
+        }
+    }
+
+    function apagar_numero(){
+        numero_resultado = []
+        div_exibir.innerHTML = ''
+        div_exibir_2.innerHTML = ''
+        div_exibir_3.innerHTML = ''
+        div_exibir_4.innerHTML = ''
+        div_exibir_5.innerHTML = ''
+    }
+
+    function adicionar0(){
+        numero_resultado.push('0')
+        div_exibir.innerHTML = numero_resultado.join('')
+    }
+
+    function adicionar1(){
+        numero_resultado.push('1')
+        div_exibir.innerHTML = numero_resultado.join('')
+    }
+
+    function adicionar2(){
+        numero_resultado.push('2')
+        div_exibir.innerHTML = numero_resultado.join('')
+    }
+
+    function adicionar3(){
+        numero_resultado.push('3')
+        div_exibir.innerHTML = numero_resultado.join('')
+    }
+
+    function adicionar4(){
+        numero_resultado.push('4')
+        div_exibir.innerHTML = numero_resultado.join('')
+    }
+
+    function adicionar5(){
+        numero_resultado.push('5')
+        div_exibir.innerHTML = numero_resultado.join('')
+    }
+
+    function adicionar6(){
+        numero_resultado.push('6')
+        div_exibir.innerHTML = numero_resultado.join('')
+    }
+
+    function adicionar7(){
+        numero_resultado.push('7')
+        div_exibir.innerHTML = numero_resultado.join('')
+    }
+
+    function adicionar8(){
+        numero_resultado.push('8')
+        div_exibir.innerHTML = numero_resultado.join('')
+    }
+
+    function adicionar9(){
+        numero_resultado.push('9')
+        div_exibir.innerHTML = numero_resultado.join('')
+    }
+
+    function adicionara(){
+        numero_resultado.push('A')
+        div_exibir.innerHTML = numero_resultado.join('')
+    }
+
+    function adicionarb(){
+        numero_resultado.push('B')
+        div_exibir.innerHTML = numero_resultado.join('')
+    }
+
+    function adicionarc(){
+        numero_resultado.push('C')
+        div_exibir.innerHTML = numero_resultado.join('')
+    }
+
+    function adicionard(){
+        numero_resultado.push('D')
+        div_exibir.innerHTML = numero_resultado.join('')
+    }
+
+    function adicionare(){
+        numero_resultado.push('E')
+        div_exibir.innerHTML = numero_resultado.join('')
+    }
+
+    function adicionarf(){
+        numero_resultado.push('F')
+        div_exibir.innerHTML = numero_resultado.join('')
     }
 
     function converter_decimal_tudo() {
-        let numero = Number(ipt_numero.value)
+        let numero = Number(numero_resultado.join(''))
         div_exibir_2.innerHTML = `Decimal: ${numero}`
         converter_decimal_binario_octal_hexadecimal()
     }
@@ -55,25 +429,31 @@
 
         // Parte binaria
         potencia_2 = [1]
-        let numero = ipt_numero.value
+        let numero = Number(numero_resultado.join(''))
         let resultado_binario = ""
-        while (numero >= potencia_2[potencia_2.length - 1]) {
-            potencia_2.push(2 ** potencia_2.length)
-        }
 
-        let contador = potencia_2.length - 2
-
-        while (contador >= 0) {
-
-            if (numero >= potencia_2[contador]) {
-                numero = numero - potencia_2[contador]
-                resultado_binario = resultado_binario + "1"
-            } else {
-                resultado_binario = resultado_binario + "0"
+        if (numero == 0) {
+            resultado_binario = "0"
+        } else {
+            while (numero >= potencia_2[potencia_2.length - 1]) {
+                potencia_2.push(2 ** potencia_2.length)
             }
 
-            contador = contador - 1
+            let contador = potencia_2.length - 2
+
+            while (contador >= 0) {
+
+                if (numero >= potencia_2[contador]) {
+                    numero = numero - potencia_2[contador]
+                    resultado_binario = resultado_binario + "1"
+                } else {
+                    resultado_binario = resultado_binario + "0"
+                }
+
+                contador = contador - 1
+            }
         }
+
         div_exibir_3.innerHTML = `Binario: ${resultado_binario}`
 
         // Parte Octal
@@ -117,25 +497,25 @@
         div_exibir_5.innerHTML = `Hexadecimal: ${resultado_hexadecimal}`
     }
 
-    function converter_binario_tudo(){
-        let numero = Number(ipt_numero.value)
+    function converter_binario_tudo() {
+        let numero = numero_resultado.join('')
         div_exibir_3.innerHTML = `Binario: ${numero}`
         converter_binario_decimal_octal_hexadecimal()
     }
 
     // 2 PARTE CONVERSOR
 
-    function converter_binario_decimal_octal_hexadecimal(){
+    function converter_binario_decimal_octal_hexadecimal() {
 
         // Parte decimal
 
         potencia_2 = [1]
-        let numero = ipt_numero.value
+        let numero = numero_resultado.join('')
         let resultado_decimal = 0
 
         let numero_lista = numero.split('')
 
-        while (numero_lista[0] == '0'){
+        while (numero_lista.length > 1 && numero_lista[0] == '0') {
             numero_lista.shift()
         }
 
@@ -202,16 +582,16 @@
     // TERCEIRA PARTE CONVERSOR
 
     function converter_octal_tudo() {
-        let numero = Number(ipt_numero.value)
+        let numero = numero_resultado.join('')
         div_exibir_4.innerHTML = `Octal: ${numero}`
         converter_octal_binario_decimal_hexadecimal()
     }
 
-    function converter_octal_binario_decimal_hexadecimal(){
+    function converter_octal_binario_decimal_hexadecimal() {
 
         // PARTE BINARIA
 
-        let numero = ipt_numero.value
+        let numero = numero_resultado.join('')
         let numero_lista = numero.split('')
         let resultado_binario = ''
 
@@ -224,7 +604,7 @@
         }
 
         let resultado_binario_lista = resultado_binario.split('')
-        while (resultado_binario_lista[0] == 0){
+        while (resultado_binario_lista.length > 1 && resultado_binario_lista[0] == 0) {
             resultado_binario_lista.shift()
         }
         resultado_binario = resultado_binario_lista.join('')
@@ -279,10 +659,10 @@
     // QUARTA PARTE CONVERSOR
 
     function converter_hexadecimal_tudo() {
-        let numero = ipt_numero.value
+        let numero = numero_resultado.join('')
         let numero_lista = numero.split('')
 
-        while (numero_lista[0] == '0'){
+        while (numero_lista.length > 1 && numero_lista[0] == '0') {
             numero_lista.shift()
         }
         numero = numero_lista.join('')
@@ -291,15 +671,15 @@
         converter_hexadecimal_binario_decimal_octal()
     }
 
-    function converter_hexadecimal_binario_decimal_octal(){
+    function converter_hexadecimal_binario_decimal_octal() {
 
         // PARTE BINARIA
 
-        let numero = ipt_numero.value
+        let numero = numero_resultado.join('')
         let numero_lista = numero.split('')
         let resultado_binario = ''
 
-        let tabela_hexadecimal = { '0': '0000', '1': '0001', '2': '0010', '3': '0011', '4': '0100', '5': '0101', '6': '0110', '7': '0111', '8': '1000', '9': '1001', 'A': '1010', 'B': '1011', 'C': '1100', 'D': '1101', 'E': '1110', 'F': '1111'}
+        let tabela_hexadecimal = { '0': '0000', '1': '0001', '2': '0010', '3': '0011', '4': '0100', '5': '0101', '6': '0110', '7': '0111', '8': '1000', '9': '1001', 'A': '1010', 'B': '1011', 'C': '1100', 'D': '1101', 'E': '1110', 'F': '1111' }
 
         for (let quarteto of numero_lista) {
             if (quarteto in tabela_hexadecimal) {
@@ -308,7 +688,7 @@
         }
 
         let resultado_binario_lista = resultado_binario.split('')
-        while (resultado_binario_lista[0] == 0){
+        while (resultado_binario_lista.length > 1 && resultado_binario_lista[0] == 0) {
             resultado_binario_lista.shift()
         }
         resultado_binario = resultado_binario_lista.join('')
