@@ -35,7 +35,7 @@ body {
     min-width: 350px;
     min-height: 250px;
 
-    border-style: outset;
+    border-style: ridge;
     border-width: 10px;
     border-color: black;
     border-radius: 10px;
@@ -50,7 +50,7 @@ body {
     background-size: 10px 10px;
 }
 
-.text_tela{
+.text_tela {
     margin: 10px;
     font-size: 40px;
     display: flex;
@@ -91,7 +91,7 @@ body {
     min-width: 350px;
     min-height: 30px;
 
-    border-style: outset;
+    border-style: ridge;
     border-width: 10px;
     border-color: black;
     border-radius: 10px;

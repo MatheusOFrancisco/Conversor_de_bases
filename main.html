@@ -70,6 +70,8 @@
     let hexadecimal_escolhido = false
 
     function decimal() {
+        apagar_numero()
+        
         button0.className = 'button_ativo'
         button0.onclick = adicionar0
 
@@ -131,6 +133,8 @@
     }
 
     function binario() {
+        apagar_numero()
+
         button0.className = 'button_ativo'
         button0.onclick = adicionar0
 
@@ -192,6 +196,8 @@
     }
 
     function octal() {
+        apagar_numero()
+
         button0.className = 'button_ativo'
         button0.onclick = adicionar0
 
@@ -253,6 +259,8 @@
     }
 
     function hexadecimal() {
+        apagar_numero()
+
         button0.className = 'button_ativo'
         button0.onclick = adicionar0
 
@@ -736,7 +744,6 @@
                 resultado_octal = resultado_octal + tabela_octal[trio]
             }
         }
-
         div_exibir_4.innerHTML = `Octal: ${resultado_octal}`
     }
 </script>
